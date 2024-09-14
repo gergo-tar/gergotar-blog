@@ -1,0 +1,12 @@
+grumphp:
+  git_hook_variables:
+    EXEC_GRUMPHP_COMMAND: "./vendor/bin/sail exec -T laravel.test"
+  extensions:
+    - YieldStudio\GrumPHPLaravelPint\ExtensionLoader
+  tasks: {
+      laravel_pint: { config: pint.json, auto_fix: true, triggered_by: [php] },
+      phpstan: { configuration: phpstan.neo.dist, triggered_by: [php] },
+      phpmd: { ruleset: ["./phpmd-ruleset.xml"], triggered_by: [php] },
+      securitychecker_enlightn: { run_always: true },
+      # pest: null,
+    }

@@ -1,0 +1,15 @@
+includes:
+    - ./vendor/larastan/larastan/extension.neon
+
+parameters:
+
+    paths:
+        - app
+
+    # Level 9 is the highest level
+    level: 5
+
+    excludePaths:
+        - tests/*
+        - database/factories/*
+        - routes/console.php

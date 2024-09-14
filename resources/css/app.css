@@ -1,0 +1,52 @@
+@tailwind base;
+@tailwind components;
+
+html {
+  @apply antialiased font-body;
+}
+
+@tailwind utilities;
+
+.container {
+  max-width: 600px;
+
+  @screen sm {
+    max-width: 700px;
+  }
+
+  @screen md {
+    max-width: 850px;
+  }
+}
+
+.twitter-card {
+  @apply px-6 py-8 mt-8 mb-8 rounded bg-yellow-lighter sm:mt-10 sm:mb-10 md:px-10;
+
+  & &-title {
+    @apply mt-0 text-lg font-normal font-body text-blue-dark dark:text-blue-dark sm:text-xl;
+  }
+
+  & &-source {
+    @apply block pt-2 text-sm font-light underline font-body text-blue-dark;
+  }
+
+  & &-btn {
+    @apply inline-block px-5 py-2 mt-8 mb-0 font-semibold no-underline transition-colors border border-blue-dark font-body text-blue-dark hover:bg-primary hover:text-white sm:mb-4;
+  }
+}
+
+.prose pre {
+  background: #282c34;
+}
+
+.filament-tiptap-grid-builder {
+  @screen md {
+      @apply grid gap-4;
+      grid-template-columns: repeat(var(--grid-cols, 1), minmax(0, 1fr));
+  }
+
+  &__column {
+    grid-column: span var(--col-span, 1);
+  }
+}
+
