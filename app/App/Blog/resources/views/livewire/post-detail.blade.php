@@ -21,7 +21,7 @@
 
         {{-- Featured image --}}
         @if ($post->relationLoaded('featuredImage') && $post->featured_image_url)
-        <img src="{{ $post->featured_image_url }}" alt="{{ $post->featured_image_alt }}" class="w-full my-4 rounded-sm max-h-96">
+        <img src="{{ $post->featured_image_url }}" alt="{{ $post->featured_image_alt }}" class="object-cover w-full my-4 rounded-sm max-h-96">
         @endif
         {{-- Content --}}
         <div class="py-8 prose border-b max-w-none border-grey-lighter dark:prose-dark sm:py-12">
@@ -128,8 +128,7 @@
 
                 // Create a button for copying, styled and positioned in the top-right corner
                 let copyButton = document.createElement('button');
-                copyButton.innerHTML = `
-                    <svg class="w-5 h-5 text-white transition lg:text-gray-500 shrink-0 lg:group-hover:text-white copy-button hover:cursor-pointer"
+                copyButton.innerHTML = `<svg class="w-5 h-5 text-white transition lg:text-gray-500 shrink-0 lg:group-hover:text-white copy-button hover:cursor-pointer"
                         xmlns="http://www.w3.org/2000/svg"
                         viewBox="0 0 20 20"
                         fill="currentColor"
@@ -137,8 +136,7 @@
                     >
                         <path d="M8 2a1 1 0 000 2h2a1 1 0 100-2H8z"></path>
                         <path d="M3 5a2 2 0 012-2 3 3 0 003 3h2a3 3 0 003-3 2 2 0 012 2v6h-4.586l1.293-1.293a1 1 0 00-1.414-1.414l-3 3a1 1 0 000 1.414l3 3a1 1 0 001.414-1.414L10.414 13H15v3a2 2 0 01-2 2H5a2 2 0 01-2-2V5zM15 11h2a1 1 0 110 2h-2v-2z"></path>
-                    </svg>
-                `;
+                    </svg>`;
                 copyButton.classList.add('absolute', 'top-3', 'right-3', 'lg:opacity-25', 'lg:group-hover:opacity-100', 'transition-opacity'); // Position top-right
 
                 // Append the original <pre> block's parent (which should be the <pre> tag) to the wrapper
