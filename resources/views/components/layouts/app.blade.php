@@ -13,6 +13,8 @@
     {!! Twitter::generate() !!}
     {!! JsonLd::generate() !!}
 
+    <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
+
     @if (app()->getLocale() !== 'en')
         <meta property="og:locale" content="{{ app()->getLocale() }}">
     @endif

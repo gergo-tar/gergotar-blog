@@ -1,7 +1,7 @@
 <footer class="container mx-auto">
     <div class="flex flex-col items-center justify-between py-10 border-t border-grey-lighter sm:flex-row sm:py-12">
         <div class="flex flex-col items-center mr-auto sm:flex-row">
-            <a href="{{ route('home') }}" class="mr-auto sm:mr-6">
+            <a href="{{ route('home') }}" wire:navigate class="mr-auto sm:mr-6">
                 <x-logo />
             </a>
             <p class="pt-5 font-light font-body text-primary dark:text-white sm:pt-0">

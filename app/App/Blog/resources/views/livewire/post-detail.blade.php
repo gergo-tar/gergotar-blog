@@ -74,6 +74,10 @@
             const showCopiedContentNotification = () => {
                 let notification = getNotification();
 
+                if (!notification) {
+                    return;
+                }
+
                 // Add flex class if it is not present
                 if (!notification.classList.contains('flex')) {
                     notification.classList.add('flex');
@@ -93,6 +97,10 @@
             const removeCopiedContentNotification = () => {
                 let notification = getNotification();
 
+                if (!notification) {
+                    return;
+                }
+
                 // Add hidden class if it is not present
                 if (!notification.classList.contains('hidden')) {
                     notification.classList.add('hidden');
@@ -109,9 +117,11 @@
                 notification.classList.add('transform', 'ease-out', 'duration-300');
             }
 
-            getNotification().querySelector('button').addEventListener('click', function() {
-                removeCopiedContentNotification();
-            });
+            if (getNotification()) {
+                getNotification().querySelector('button').addEventListener('click', function() {
+                    removeCopiedContentNotification();
+                });
+            }
 
             codeBlocks.forEach(function(originalCodeBlock) {
                 // Get the class of the original <code> block
@@ -164,7 +174,7 @@
                         timeoutId = setTimeout(function() {
                             // Only remove it if it is still visible
                             let notification = getNotification();
-                            if (!notification.classList.contains('hidden')) {
+                            if (notification && !notification.classList.contains('hidden')) {
                                 removeCopiedContentNotification();
                             }
                         }, 3000); // Notification visible for 3 seconds

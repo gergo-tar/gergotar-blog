@@ -1,6 +1,6 @@
 <nav class="container mx-auto">
     <div class="flex items-center justify-between py-6 lg:py-10">
-        <a href="{{ route('home') }}" class="flex items-center">
+        <a href="{{ route('home') }}" wire:navigate class="flex items-center">
             <span class="mr-2">
                 <x-logo />
             </span>
