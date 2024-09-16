@@ -69,4 +69,12 @@ class User extends Authenticatable implements FilamentUser
         return str_ends_with($this->email, '@' . config('mail.filament_user_mail_domain'))
             && $this->hasVerifiedEmail();
     }
+
+    /**
+     * Determine if the user is an admin.
+     */
+    public function getIsAdminAttribute(): bool
+    {
+        return $this->email === config('mail.filament_admin_mail');
+    }
 }

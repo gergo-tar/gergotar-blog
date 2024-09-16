@@ -38,6 +38,13 @@
 
     @filamentStyles
     @vite('resources/css/app.css')
+
+    @if( config('app.env') === 'production'
+        && config('umami.website_id')
+        && (auth()->guest() || !auth()->user()->is_admin)
+    )
+        <script defer src="https://umami.gergotar.com/script.js" data-website-id="{{ config('umami.website_id') }}"></script>
+    @endif
 </head>
 
 <body
