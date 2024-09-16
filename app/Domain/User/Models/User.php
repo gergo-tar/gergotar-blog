@@ -66,8 +66,7 @@ class User extends Authenticatable implements FilamentUser
      */
     public function canAccessPanel(Panel $panel): bool
     {
-        return str_ends_with($this->email, '@' . config('mail.filament_user_mail_domain'))
-            && $this->hasVerifiedEmail();
+        return $this->is_admin && $this->hasVerifiedEmail();
     }
 
     /**
@@ -75,6 +74,6 @@ class User extends Authenticatable implements FilamentUser
      */
     public function getIsAdminAttribute(): bool
     {
-        return $this->email === config('mail.filament_admin_mail');
+        return str_ends_with($this->email, '@' . config('mail.filament_user_mail_domain'));
     }
 }
