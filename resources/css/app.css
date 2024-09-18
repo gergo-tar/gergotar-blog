@@ -35,9 +35,18 @@ html {
   }
 }
 
-.prose pre {
-  background: #282c34;
+.prose {
+    pre {
+        background: #282c34;
+        code.hljs {
+            padding: 0.25em;
+        }
+    }
+    img:not(:where([class~="not-prose"], [class~="not-prose"] *)) {
+        margin: 0;
+    }
 }
+
 
 .filament-tiptap-grid-builder {
   @screen md {
