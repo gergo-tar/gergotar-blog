@@ -29,23 +29,23 @@
             </div>
             <ul class="pl-10 list-disc">
                 <li class="text-lg font-light font-body text-primary dark:text-white">
-                    <span class="font-medium"><a href="laravel.com" target="_blank"
+                    <span class="font-medium"><a href="https://laravel.com" target="_blank"
                             class="underline text-green hover:text-secondary dark:text-green-light dark:hover:text-secondary">Laravel</a>:</span>
                     {{ __('Page::about.technologies.list.laravel') }}
                 </li>
                 <li class="pt-5 text-lg font-light font-body text-primary dark:text-white">
-                    <span class="font-medium"><a href="vuejs.org" target="_blank"
+                    <span class="font-medium"><a href="https://vuejs.org" target="_blank"
                             class="underline text-green hover:text-secondary dark:text-green-light dark:hover:text-secondary">Vue.js</a>:</span>
                     {{ __('Page::about.technologies.list.vue') }}
                 </li>
                 <li class="pt-5 text-lg font-light font-body text-primary dark:text-white">
-                    <span class="font-medium"><a href="tailwindcss.com" target="_blank"
+                    <span class="font-medium"><a href="https://tailwindcss.com" target="_blank"
                             class="underline text-green hover:text-secondary dark:text-green-light dark:hover:text-secondary">Tailwind
                             CSS</a>:</span>
                     {{ __('Page::about.technologies.list.tailwind') }}
                 </li>
                 <li class="pt-5 text-lg font-light font-body text-primary dark:text-white">
-                    <span class="font-medium"><a href="laravel-livewire.com" target="_blank"
+                    <span class="font-medium"><a href="https://livewire.laravel.com" target="_blank"
                             class="underline text-green hover:text-secondary dark:text-green-light dark:hover:text-secondary">Livewire</a>:</span>
                     {{ __('Page::about.technologies.list.livewire') }}
                 </li>
