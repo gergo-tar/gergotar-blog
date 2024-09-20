@@ -11,6 +11,7 @@ return [
     |
     */
 
+    'content' => 'This blog is a place where I share my thoughts on web development, programming, and other topics that interest me. I write about Laravel, Tailwind CSS, Vue.js, Livewire, and other technologies that I use in my projects. I also share tips and tricks that I have learned over the years.',
     'index' => 'Intro',
     'hero' => [
         'title' => 'Hi, I’m :name.',

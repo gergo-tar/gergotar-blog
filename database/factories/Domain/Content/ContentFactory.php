@@ -66,17 +66,6 @@ class ContentFactory extends AbstractModelHasTranslationFactory
     }
 
     /**
-     * Indicate that it is a blog content.
-     */
-    public function blog(): static
-    {
-        return $this->state(fn () => [
-            'title' => 'Blog',
-            'slug' => 'blog',
-        ]);
-    }
-
-    /**
      * Indicate that it is an about content.
      */
     public function about(): static
@@ -88,6 +77,17 @@ class ContentFactory extends AbstractModelHasTranslationFactory
     }
 
     /**
+     * Indicate that it is a blog content.
+     */
+    public function blog(): static
+    {
+        return $this->state(fn () => [
+            'title' => 'Blog',
+            'slug' => 'blog',
+        ]);
+    }
+
+    /**
      * Indicate that it is a contact content.
      */
     public function contact(): static
@@ -95,6 +95,17 @@ class ContentFactory extends AbstractModelHasTranslationFactory
         return $this->state(fn () => [
             'title' => 'Contact',
             'slug' => 'contact',
+        ]);
+    }
+
+    /**
+     * Indicate that it is an intro content.
+     */
+    public function intro(): static
+    {
+        return $this->state(fn () => [
+            'title' => 'Intro',
+            'slug' => 'intro',
         ]);
     }
 }

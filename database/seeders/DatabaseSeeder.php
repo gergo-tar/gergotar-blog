@@ -3,8 +3,8 @@
 namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
-use Domain\User\Models\User;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\Artisan;
 
 class DatabaseSeeder extends Seeder
 {
@@ -13,11 +13,13 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        User::factory()->create([
-            'name' => 'Admin',
-            'email' => 'admin@' . config('mail.filament_user_mail_domain'),
-        ]);
-
+        $this->call(UserSeeder::class);
         $this->call(FormSeeder::class);
+        $this->call(ContentSeeder::class);
+        $this->call(ProjectSeeder::class);
+        $this->call(PostSeeder::class);
+
+        // Clear application cache
+        Artisan::call('cache:clear');
     }
 }

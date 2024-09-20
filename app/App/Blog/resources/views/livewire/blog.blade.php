@@ -19,7 +19,7 @@
     </div>
 
     <div class="pt-8 lg:pt-12">
-        <livewire:blog.post-list-paginated :limit="1" />
+        <livewire:blog.post-list-paginated :limit="5" />
     </div>
 </div>
 

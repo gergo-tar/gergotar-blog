@@ -13,7 +13,9 @@ class ContentTranslationObserver
     public function creating(ContentTranslation $model): void
     {
         // Update Content updated_at timestamp
-        $model->contentModel->touch();
+        if ($model->contentModel) {
+            $model->contentModel->touch();
+        }
     }
 
     /**
