@@ -40,6 +40,9 @@ class PostTranslationForm
                 ->maxContentWidth('5xl')
                 ->when($isDefaultLocale, fn ($component) => $component->required())
                 ->requiredWith("{$locale}.title"),
+            Textarea::make("{$locale}.excerpt")
+                ->label(__('translations.attributes.excerpt', ['locale' => $locale]))
+                ->maxLength(160),
             Section::make('Meta')
                 ->description(__('general.meta.info'))
                 ->schema([

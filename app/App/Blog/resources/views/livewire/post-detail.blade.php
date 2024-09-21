@@ -17,6 +17,16 @@
                     {{ $post->translation->reading_time_string }}
                 </p>
             </div>
+            {{-- Tags --}}
+            <div class="flex flex-wrap">
+                @foreach ($post->tags as $tag)
+                <span
+                class="inline-block px-2 py-1 mt-4 mb-4 text-sm rounded-full bg-yellow-light font-body text-yellow-dark dark:text-green-dark @if ($loop->first) mr-1 @else mx-1 @endif"
+                >
+                {{ $tag->translation->name }}
+                </span>
+                @endforeach
+            </div>
         </div>
 
         {{-- Featured image --}}

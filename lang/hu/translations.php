@@ -15,6 +15,7 @@ return [
     'attributes' => [
         'content' => 'Tartalom (:locale)',
         'description' => 'Leírás (:locale)',
+        'excerpt' => 'Összefoglaló (:locale)',
         'name' => 'Név (:locale)',
         'title' => 'Cím (:locale)',
     ],

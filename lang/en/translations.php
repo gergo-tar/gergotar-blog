@@ -15,6 +15,7 @@ return [
     'attributes' => [
         'content' => 'Content (:locale)',
         'description' => 'Description (:locale)',
+        'excerpt' => 'Excerpt (:locale)',
         'name' => 'Name (:locale)',
         'title' => 'Title (:locale)',
     ],
