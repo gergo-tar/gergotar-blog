@@ -92,9 +92,11 @@ class SavePost
             $data[$language]['meta']['description'] ??= $data[$language]['excerpt'];
 
             // Update the content to add IDs to <h3> tags if missing, ensuring unique IDs.
-            $toc = $this->generateToc($data[$language]['content']);
-            $data[$language]['content'] = $toc['html'];
-            $data[$language]['toc'] = $toc['toc'];
+            if ($data[$language]['content']) {
+                $toc = $this->generateToc($data[$language]['content']);
+                $data[$language]['content'] = $toc['html'];
+                $data[$language]['toc'] = $toc['toc'];
+            }
         }
 
         return $data;
