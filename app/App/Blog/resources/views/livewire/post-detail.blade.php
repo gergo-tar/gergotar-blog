@@ -75,7 +75,7 @@
             cleanup
         }) => {
             let timeoutId; // Global variable to store the timeout ID
-            let codeBlocks = document.querySelectorAll('code'); // Select all code blocks
+            let codeBlocks = document.querySelectorAll('pre code'); // Select all code blocks under <pre> tags
 
             const getNotification = () => {
                 return document.getElementById('copy-code-notification');

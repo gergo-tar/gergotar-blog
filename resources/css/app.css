@@ -42,6 +42,10 @@ html {
             padding: 0.25em;
         }
     }
+    code:not(:where([class~="not-prose"], [class~="not-prose"] *))::before,
+    code:not(:where([class~="not-prose"], [class~="not-prose"] *))::after {
+        content: "";
+    }
     img:not(:where([class~="not-prose"], [class~="not-prose"] *)) {
         margin: 0;
     }
