@@ -2,6 +2,7 @@
 
 namespace Domain\Blog\Actions;
 
+use DOMDocument;
 use Domain\Blog\Models\Post;
 use Lorisleiva\Actions\Concerns\AsAction;
 use Domain\Blog\Actions\Cache\ClearPostCache;
@@ -35,13 +36,11 @@ class SavePost
         $postData = $dataCollection->only((new Post())->getFillable())->toArray();
 
         $post = $this->updatePostData($postData, $post);
-
         // Store its translations.
         StoreTranslations::run(
             $post,
             $dataCollection->only(config('localized-routes.supported_locales'))->toArray()
         );
-
         // Sync tags & category.
         SyncPostRelationships::run($post, $data);
 
@@ -65,7 +64,6 @@ class SavePost
             'value',
         ])->loadFeaturedImage();
     }
-
 
     /**
      * Set default data values.
@@ -92,9 +90,52 @@ class SavePost
                 160
             );
             $data[$language]['meta']['description'] ??= $data[$language]['excerpt'];
+
+            // Update the content to add IDs to <h3> tags if missing, ensuring unique IDs.
+            $toc = $this->generateToc($data[$language]['content']);
+            $data[$language]['content'] = $toc['html'];
+            $data[$language]['toc'] = $toc['toc'];
         }
 
         return $data;
+    }
+
+    /**
+     * Update the content to add IDs to <h3> tags if missing, ensuring unique IDs.
+     * And generate a Table of Contents (ToC) from the given HTML content.
+     *
+     * @param string $html  The HTML content.
+     */
+    protected function generateToc(string $html): array
+    {
+        $dom = new DOMDocument();
+        $dom->loadHTML($html);
+        $toc = '';
+
+        // Find all <h3> elements
+        foreach ($dom->getElementsByTagName('h3') as $index => $heading) {
+            // Check if the <h3> has an ID
+            $id = $heading->getAttribute('id');
+
+            // If no ID exists, generate a unique ID and set it
+            if (!$id) {
+                $id = 'heading-' . $index . '-' . uniqid();
+                $heading->setAttribute('id', $id);  // Set the unique ID
+            }
+
+            $toc .= '<li><a href="#' . $id . '">' . $heading->textContent . '</a></li>';
+        }
+
+        // Save and return the updated HTML content but only the body
+        $body = $dom->saveHTML($dom->getElementsByTagName('body')->item(0));
+
+        // Remove <body> and </body> tags
+        return [
+            'html' => str_replace(['<body>', '</body>'], '', $body),
+            'toc' => $toc !== ''
+                ? "<ul>{$toc}</ul>"
+                : null,
+        ];
     }
 
     /**

@@ -29,6 +29,7 @@ class PostTranslation extends AbstractTranslation
         'title',
         'slug',
         'content',
+        'toc',
         'excerpt',
         'reading_time',
         'created_by',

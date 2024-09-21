@@ -17,6 +17,7 @@ return [
     'plural' => 'Bejegyzések',
     'published_at' => 'Publikálás ideje',
     'singular' => 'Bejegyzés',
+    'toc' => 'Tartalomjegyzék',
     'translations' => [
         'reading_time_in_minutes' => ':min perc',
         'reading_time_in_seconds' => ':sec másodperc',

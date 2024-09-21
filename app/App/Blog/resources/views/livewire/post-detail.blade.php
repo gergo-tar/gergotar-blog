@@ -33,6 +33,17 @@
         @if ($post->relationLoaded('featuredImage') && $post->featured_image_url)
         <img src="{{ $post->featured_image_url }}" alt="{{ $post->featured_image_alt }}" class="object-cover w-full my-4 rounded-sm max-h-96">
         @endif
+        {{-- TOC --}}
+        @if ($post->translation->toc)
+        <div class="mt-8 prose border-b max-w-none border-grey-lighter dark:prose-dark sm:mt-12" id="toc">
+            <h2 class="text-lg font-semibold font-body text-primary dark:text-white">
+                {{ __('Blog::post.toc') }}
+            </h2>
+            <div class="toc">
+                {!! $post->translation->toc !!}
+            </div>
+        </div>
+        @endif
         {{-- Content --}}
         <div class="py-8 prose border-b max-w-none border-grey-lighter dark:prose-dark sm:py-12">
             {!! $post->translation->content !!}

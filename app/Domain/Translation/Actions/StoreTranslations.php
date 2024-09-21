@@ -33,11 +33,9 @@ class StoreTranslations
                 continue;
             }
 
-            // Remove empty values from array.
-            $data[$locale] = array_filter_recursive($data[$locale]);
-
-            if (empty($data[$locale])) {
-                // If translation exists then delete it.
+            // Check if the translation is empty then delete them.
+            if (empty(array_filter_recursive($data[$locale]))) {
+                // If translation exists then delete them.
                 $this->deleteTranslation($model, $locale, $hasTranslations);
 
                 continue;
@@ -129,10 +127,10 @@ class StoreTranslations
             if ($newMetas->isNotEmpty()) {
                 $meta = array_merge($meta, $newMetas->pluck('value', 'key')->toArray());
             }
-        }
 
-        // In case the transaltion has meta data store them.
-        StoreMetas::run($model, $meta);
+            // In case the transaltion has meta data store them.
+            StoreMetas::run($model, $meta);
+        }
     }
 
     /**
@@ -158,6 +156,7 @@ class StoreTranslations
         if (! empty($extra)) {
             $value = array_merge($value, $extra);
         }
+
         // @phpstan-ignore method.notFound
         $translation = $model->translations()->where('locale', $locale)->updateOrCreate(
             ['locale' => $locale],

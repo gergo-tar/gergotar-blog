@@ -30,7 +30,7 @@ test('create-post', function () {
         $data[$locale] = [
             'title' => "Post Title {$locale}",
             'content' => "<p>Post Content {$locale}</p>" .
-                "<p><img src='https://example.com/image.jpg' alt='Image Alt' width='100' height='100'></p>" .
+                '<p><img src="https://example.com/image.jpg" alt="Image Alt" width="100" height="100"></p>' .
                 '<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>' .
                 '<p>Nullam nec purus nec nunc ultricies aliquam.</p>' .
                 '<p>Donec nec nunc nec nunc ultricies aliquam.</p>',
@@ -112,7 +112,7 @@ test('update-post', function () {
     foreach ($locales as $locale) {
         $translation = $post->translations->where('locale', $locale)->first();
         expect($translation->title)->toBe("Post Title {$locale}");
-        expect($translation->content)->toBe("Post Content {$locale}");
+        expect($translation->content)->toBe("<p>Post Content {$locale}</p>");
         // Check Metas.
         expect($translation->metas->where('key', 'title')->first()->value)->toBe("Post Title Meta {$locale}");
         expect($translation->metas->where('key', 'description')->first()->value)->toBe("Post Description Meta {$locale}");

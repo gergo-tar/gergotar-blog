@@ -8,5 +8,5 @@ grumphp:
       phpstan: { configuration: phpstan.neo.dist, triggered_by: [php] },
       phpmd: { ruleset: ["./phpmd-ruleset.xml"], triggered_by: [php] },
       securitychecker_enlightn: { run_always: true },
-      # pest: null,
+      #pest: null,
     }

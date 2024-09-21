@@ -23,6 +23,14 @@ class StoreMetas
             return collect();
         }
 
+        // Check if the metas is empty then delete them.
+        if (empty(array_filter_recursive($data))) {
+            // If metas exists then delete them.
+            $model->metas()->delete();
+
+            return collect();
+        }
+
         // Normalize data.
         $data = Arr::map($data, function (mixed $meta, string $key) use ($model) {
             if (is_string($meta)) {

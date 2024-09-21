@@ -22,7 +22,7 @@ class GetPublishedPostBySlug
             ->wherePublished()
             ->whereTranslationSlug($slug)
             ->withTranslations(
-                ['post_id', 'locale', 'title', 'slug', 'content', 'excerpt'],
+                ['post_id', 'locale', 'title', 'slug', 'content', 'excerpt', 'toc'],
                 $slug
             )
             ->withTranslationsMetas(['metable_type', 'metable_id', 'key', 'value'])

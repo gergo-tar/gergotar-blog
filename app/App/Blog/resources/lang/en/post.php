@@ -19,6 +19,7 @@ return [
     'plural' => 'Posts',
     'published_at' => 'Published At',
     'singular' => 'Post',
+    'toc' => 'Table of Contents',
     'translations' => [
         'reading_time_in_minutes' => ':min min read',
         'reading_time_in_seconds' => ':sec sec read',
