@@ -33,7 +33,7 @@
         @foreach ($post->tags as $tag)
         <span
           class="inline-block px-2 py-1 mx-1 mt-4 mb-4 text-sm rounded-full bg-yellow-light font-body text-yellow-dark dark:text-green-dark"
-          >
+        >
           {{ $tag->translation->name }}
         </span>
         @endforeach

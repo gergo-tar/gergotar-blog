@@ -47,6 +47,13 @@ html {
     }
 }
 
+.dark {
+    p > code,
+    .prose :where(strong):not(:where([class~="not-prose"], [class~="not-prose"] *)) {
+        color: #f8f8f2;
+    }
+}
+
 
 .filament-tiptap-grid-builder {
   @screen md {
