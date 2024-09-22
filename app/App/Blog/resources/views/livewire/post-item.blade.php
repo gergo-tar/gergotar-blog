@@ -20,19 +20,19 @@
             {{ $post->translation->excerpt }}
         </a>
     </p>
-    <div class="flex items-center pt-4">
-      <p class="pr-2 font-light font-body text-primary dark:text-white">
+    <div class="flex flex-col pt-4 sm:flex-row sm:items-center">
+      {{-- Author --}}
+      <p class="font-light font-body text-primary dark:text-white">
         {{ $post->published_at_formatted }}
       </p>
-      <span class="font-body text-grey dark:text-white">//</span>
-      <p class="pl-2 font-light font-body text-primary dark:text-white">
-        {{ $post->translation->reading_time_string }}
+      <p class="mt-4 font-light font-body text-primary dark:text-white sm:mt-0">
+        <span class="font-body text-grey dark:text-white sm:pl-2">//</span> {{ $post->translation->reading_time_string }}
       </p>
       {{-- Tags --}}
-      <span class="flex flex-wrap ml-4">
+      <span class="flex flex-wrap sm:ml-4">
         @foreach ($post->tags as $tag)
         <span
-          class="inline-block px-2 py-1 mx-1 mt-4 mb-4 text-sm rounded-full bg-yellow-light font-body text-yellow-dark dark:text-green-dark"
+          class="inline-block px-2 py-1 mx-1 mt-4 mb-4 text-sm rounded-full bg-yellow-light font-body text-yellow-dark dark:text-green-dark @if($loop->first) ml-0 @endif"
         >
           {{ $tag->translation->name }}
         </span>

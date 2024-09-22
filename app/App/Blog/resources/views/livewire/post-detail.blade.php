@@ -8,13 +8,12 @@
                 class="block text-3xl font-semibold leading-tight font-body text-primary dark:text-white sm:text-4xl md:text-5xl">
                 {{ $post->translation->title }}
             </h1>
-            <div class="flex items-center pt-5 sm:pt-8">
-                <p class="pr-2 font-light font-body text-primary dark:text-white">
+            <div class="flex flex-col pt-5 sm:flex-row sm:items-center sm:pt-8">
+                <p class="font-light font-body text-primary dark:text-white">
                     {{ $post->published_at_formatted }}
                 </p>
-                <span class="vdark:text-white font-body text-grey">//</span>
-                <p class="pl-2 font-light font-body text-primary dark:text-white">
-                    {{ $post->translation->reading_time_string }}
+                <p class="mt-4 font-light font-body text-primary dark:text-white sm:mt-0">
+                    <span class="dark:text-white font-body text-grey sm:pl-2">//</span> {{ $post->translation->reading_time_string }}
                 </p>
             </div>
             {{-- Tags --}}
