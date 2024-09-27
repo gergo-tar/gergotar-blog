@@ -111,6 +111,9 @@ class SavePost
     protected function generateToc(string $html): array
     {
         $dom = new DOMDocument();
+        // In case of video embeds, we need to ignore the errors.
+        libxml_use_internal_errors(true);
+
         $dom->loadHTML($html);
         $toc = '';
 
