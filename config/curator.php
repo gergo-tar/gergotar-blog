@@ -8,6 +8,7 @@ return [
         'image/svg+xml',
         'application/pdf',
         'video/mp4',
+        'video/webm',
     ],
     'cloud_disks' => [
         's3',
@@ -21,6 +22,7 @@ return [
         'png',
         'avif',
         'mp4',
+        'webm',
     ],
     'curation_presets' => [
         \Awcodes\Curator\Curations\ThumbnailPreset::class,
