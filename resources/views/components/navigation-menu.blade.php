@@ -31,8 +31,8 @@
                     <a href="{{ route('home') }}"
                         class="relative z-30 block px-2 text-lg font-medium transition-colors font-body text-primary group-hover:text-green dark:text-white dark:group-hover:text-secondary"
                         wire:navigate>
-                            {{ __('Page::home.index') }}
-                        </a>
+                        {{ __('Page::home.index') }}
+                    </a>
                 </li>
 
                 <li class="relative mb-1 mr-6 group">
@@ -42,8 +42,8 @@
                     <a href="{{ route('blog') }}"
                         class="relative z-30 block px-2 text-lg font-medium transition-colors font-body text-primary group-hover:text-green dark:text-white dark:group-hover:text-secondary"
                         wire:navigate>
-                            {{ __('Blog::blog.index') }}
-                        </a>
+                        {{ __('Blog::blog.index') }}
+                    </a>
                 </li>
 
                 <li class="relative mb-1 mr-6 group">
@@ -76,9 +76,9 @@
         </div>
     </div>
     <div class="fixed inset-0 z-50 flex transition-opacity bg-black opacity-0 pointer-events-none bg-opacity-80 lg:hidden modal-wrapper"
-    :class="isMobileMenuOpen ? 'opacity-100 pointer-events-auto' : ''">
-    <div class="absolute w-full h-full backdrop backdrop-shaded scroll-unlock lg:hidden"
-    x-show.transition.opacity.duration.600ms="isMobileMenuOpen" @click="isMobileMenuOpen = false"></div>
+        :class="isMobileMenuOpen ? 'opacity-100 pointer-events-auto' : ''">
+        <div class="absolute w-full h-full backdrop backdrop-shaded scroll-unlock lg:hidden"
+            x-show.transition.opacity.duration.600ms="isMobileMenuOpen" @click="isMobileMenuOpen = false"></div>
         <div class="z-10 w-2/3 p-4 ml-auto bg-green md:w-1/3">
             <i class="absolute top-0 right-0 mt-4 mr-4 text-4xl text-white cursor-pointer bx bx-x"
                 @click="isMobileMenuOpen = false"></i>
@@ -94,8 +94,8 @@
                 <li class="">
                     <a href="{{ route('blog') }}" class="block px-2 mb-3 text-lg font-medium text-white font-body"
                         wire:navigate>
-                            {{ __('Blog::blog.index') }}
-                        </a>
+                        {{ __('Blog::blog.index') }}
+                    </a>
                 </li>
 
                 <li class="">

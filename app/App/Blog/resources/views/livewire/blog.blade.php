@@ -22,4 +22,3 @@
         <livewire:blog.post-list-paginated :limit="5" />
     </div>
 </div>
-

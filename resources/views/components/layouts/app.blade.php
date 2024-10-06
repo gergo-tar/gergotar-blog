@@ -39,19 +39,13 @@
     @filamentStyles
     @vite('resources/css/app.css')
 
-    @if( config('app.env') === 'production'
-        && config('umami.website_id')
-        && (auth()->guest() || !auth()->user()->is_admin)
-    )
+    @if (config('app.env') === 'production' && config('umami.website_id') && (auth()->guest() || !auth()->user()->is_admin))
         <script defer src="https://umami.gergotar.com/script.js" data-website-id="{{ config('umami.website_id') }}"></script>
     @endif
 </head>
 
-<body
-    x-data="global()"
-    x-init="themeInit()"
-    :class="isMobileMenuOpen ? 'max-h-screen overflow-hidden relative' : ''"
-    class="antialiased dark:bg-primary">
+<body x-data="global()" x-init="themeInit()"
+    :class="isMobileMenuOpen ? 'max-h-screen overflow-hidden relative' : ''" class="antialiased dark:bg-primary">
     <div class="min-h-screen bg-gray-100">
         <x-navigation-menu />
 

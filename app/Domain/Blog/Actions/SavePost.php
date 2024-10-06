@@ -116,19 +116,27 @@ class SavePost
 
         $dom->loadHTML($html);
         $toc = '';
+        $currentH3Id = null;
 
-        // Find all <h3> elements
-        foreach ($dom->getElementsByTagName('h3') as $index => $heading) {
-            // Check if the <h3> has an ID
-            $id = $heading->getAttribute('id');
+        // Find all <h3> and <h4> elements
+        foreach ($dom->getElementsByTagName('*') as $index => $element) {
+            if ($element->tagName === 'h3' || $element->tagName === 'h4') {
+                // Check if the element has an ID
+                $id = $element->getAttribute('id');
 
-            // If no ID exists, generate a unique ID and set it
-            if (!$id) {
-                $id = 'heading-' . $index . '-' . uniqid();
-                $heading->setAttribute('id', $id);  // Set the unique ID
+                // If no ID exists, generate a unique ID and set it
+                if (!$id) {
+                    $id = $element->tagName . '-' . $index . '-' . uniqid();
+                    $element->setAttribute('id', $id);  // Set the unique ID
+                }
+
+                if ($element->tagName === 'h3') {
+                    $currentH3Id = $id;
+                    $toc .= '<li><a href="#' . $id . '">' . $element->textContent . '</a></li>';
+                } elseif ($element->tagName === 'h4' && $currentH3Id) {
+                    $toc .= '<ul><li><a href="#' . $id . '">' . $element->textContent . '</a></li></ul>';
+                }
             }
-
-            $toc .= '<li><a href="#' . $id . '">' . $heading->textContent . '</a></li>';
         }
 
         // Save and return the updated HTML content but only the body

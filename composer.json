@@ -2,7 +2,10 @@
     "name": "laravel/laravel",
     "type": "project",
     "description": "The skeleton application for the Laravel framework.",
-    "keywords": ["laravel", "framework"],
+    "keywords": [
+        "laravel",
+        "framework"
+    ],
     "license": "MIT",
     "require": {
         "php": "^8.2",
@@ -12,7 +15,7 @@
         "bezhansalleh/filament-language-switch": "^3.1",
         "codezero/laravel-localized-routes": "^4.0",
         "filament/filament": "^3.2",
-        "laravel/framework": "^11.21",
+        "laravel/framework": "^11.23",
         "laravel/tinker": "^2.9",
         "livewire/livewire": "^3.5",
         "lorisleiva/laravel-actions": "^2.8",
@@ -21,14 +24,14 @@
         "stevebauman/location": "^7.3"
     },
     "require-dev": {
-        "barryvdh/laravel-debugbar": "^3.13",
+        "barryvdh/laravel-debugbar": "^3.14",
         "enlightn/security-checker": "^2.0",
         "fakerphp/faker": "^1.23",
         "larastan/larastan": "^2.9",
         "laravel-lang/common": "^6.4",
         "laravel/dusk": "^8.2",
-        "laravel/pint": "^1.16",
-        "laravel/sail": "^1.31",
+        "laravel/pint": "^1.17",
+        "laravel/sail": "^1.32",
         "mockery/mockery": "^1.6",
         "nunomaduro/collision": "^8.4",
         "pestphp/pest": "^2.35",
