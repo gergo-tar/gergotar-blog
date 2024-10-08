@@ -7,7 +7,7 @@
             {{ __('Page::contact.index') }}
         </h1>
         <div class="pt-3 pr-2 mt-4 text-xl font-light sm:pt-0 font-body text-primary dark:text-white">
-            {!! $content ? $content->translation->content : __('Page::contact.content') !!}
+            {!! $content ? tiptap_converter()->asHTML($content->translation->content) : __('Page::contact.content') !!}
         </div>
 
         <livewire:form.contact-form />

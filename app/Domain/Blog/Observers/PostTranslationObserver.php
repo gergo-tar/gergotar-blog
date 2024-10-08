@@ -14,7 +14,7 @@ class PostTranslationObserver
     public function creating(PostTranslation $model): void
     {
         // Calculate the reading time
-        $model->reading_time = EstimatePostReadingTime::run($model->content);
+        $model->reading_time = EstimatePostReadingTime::run(tiptap_converter()->asText($model->content));
         // Update Post updated_at timestamp
         $model->post->touch();
     }
@@ -25,7 +25,7 @@ class PostTranslationObserver
     public function updating(PostTranslation $model): void
     {
         // Calculate the reading time
-        $model->reading_time = EstimatePostReadingTime::run($model->content);
+        $model->reading_time = EstimatePostReadingTime::run(tiptap_converter()->asText($model->content));
         // Update Post updated_at timestamp
         $model->post->touch();
     }

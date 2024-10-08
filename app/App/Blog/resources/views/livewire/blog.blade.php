@@ -9,7 +9,9 @@
 
     <div class="pt-3 sm:w-3/4">
         <div class="text-xl font-light font-body text-primary dark:text-white">
-            {!! $content ? $content->translation->content : __('Newsletter::newsletter.subscribe.description') !!}
+            {!! $content
+                ? tiptap_converter()->asHTML($content->translation->content)
+                : __('Newsletter::newsletter.subscribe.description') !!}
         </div>
     </div>
 

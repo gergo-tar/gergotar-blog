@@ -36,7 +36,7 @@ class PostTranslationForm
                 // ->directory('string or Closure returning a string') // optional, defaults to config setting
                 // ->acceptedFileTypes(['array of file types']) // optional, defaults to config setting
                 // ->maxFileSize('integer in KB') // optional, defaults to config setting
-                ->output(TiptapOutput::Html) // optional, change the format for saved data, default is html
+                ->output(TiptapOutput::Json) // optional, change the format for saved data, default is html
                 ->maxContentWidth('5xl')
                 ->when($isDefaultLocale, fn ($component) => $component->required())
                 ->requiredWith("{$locale}.title"),

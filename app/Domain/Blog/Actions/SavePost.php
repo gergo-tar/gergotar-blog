@@ -2,7 +2,6 @@
 
 namespace Domain\Blog\Actions;
 
-use DOMDocument;
 use Domain\Blog\Models\Post;
 use Lorisleiva\Actions\Concerns\AsAction;
 use Domain\Blog\Actions\Cache\ClearPostCache;
@@ -93,62 +92,13 @@ class SavePost
 
             // Update the content to add IDs to <h3> tags if missing, ensuring unique IDs.
             if ($data[$language]['content']) {
-                $toc = $this->generateToc($data[$language]['content']);
-                $data[$language]['content'] = $toc['html'];
+                $toc = GenerateTocForContent::run($data[$language]['content']);
+                $data[$language]['content'] = $toc['json'];
                 $data[$language]['toc'] = $toc['toc'];
             }
         }
 
         return $data;
-    }
-
-    /**
-     * Update the content to add IDs to <h3> tags if missing, ensuring unique IDs.
-     * And generate a Table of Contents (ToC) from the given HTML content.
-     *
-     * @param string $html  The HTML content.
-     */
-    protected function generateToc(string $html): array
-    {
-        $dom = new DOMDocument();
-        // In case of video embeds, we need to ignore the errors.
-        libxml_use_internal_errors(true);
-
-        $dom->loadHTML($html);
-        $toc = '';
-        $currentH3Id = null;
-
-        // Find all <h3> and <h4> elements
-        foreach ($dom->getElementsByTagName('*') as $index => $element) {
-            if ($element->tagName === 'h3' || $element->tagName === 'h4') {
-                // Check if the element has an ID
-                $id = $element->getAttribute('id');
-
-                // If no ID exists, generate a unique ID and set it
-                if (!$id) {
-                    $id = $element->tagName . '-' . $index . '-' . uniqid();
-                    $element->setAttribute('id', $id);  // Set the unique ID
-                }
-
-                if ($element->tagName === 'h3') {
-                    $currentH3Id = $id;
-                    $toc .= '<li><a href="#' . $id . '">' . $element->textContent . '</a></li>';
-                } elseif ($element->tagName === 'h4' && $currentH3Id) {
-                    $toc .= '<ul><li><a href="#' . $id . '">' . $element->textContent . '</a></li></ul>';
-                }
-            }
-        }
-
-        // Save and return the updated HTML content but only the body
-        $body = $dom->saveHTML($dom->getElementsByTagName('body')->item(0));
-
-        // Remove <body> and </body> tags
-        return [
-            'html' => str_replace(['<body>', '</body>'], '', $body),
-            'toc' => $toc !== ''
-                ? "<ul>{$toc}</ul>"
-                : null,
-        ];
     }
 
     /**

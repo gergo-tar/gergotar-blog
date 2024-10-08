@@ -32,7 +32,7 @@ class ContentForm extends AbstractWithTranslationForm
             TiptapEditor::make("{$locale}.content")
                 ->label(__('translations.attributes.content', ['locale' => $locale]))
                 ->profile('default')
-                ->output(TiptapOutput::Html)
+                ->output(TiptapOutput::Json)
                 ->maxContentWidth('5xl')
                 ->when($isDefaultLocale, fn ($component) => $component->required())
                 ->requiredWith("{$locale}.title"),

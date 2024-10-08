@@ -2,8 +2,8 @@
     {{-- Hero section --}}
     <div class="py-16 border-b border-grey-lighter lg:py-20">
         <div>
-            <img src="{{ asset('img/author.png') }}" class="w-16 h-16 rounded-full dark:bg-white dark:border-2 dark:border-secondary"
-                alt="author" />
+            <img src="{{ asset('img/author.png') }}"
+                class="w-16 h-16 rounded-full dark:bg-white dark:border-2 dark:border-secondary" alt="author" />
         </div>
         <h1 class="pt-3 text-4xl font-semibold font-body text-primary dark:text-white md:text-5xl lg:text-6xl">
             {{ __('Page::home.hero.title', ['name' => get_blog_owner_name(app()->getLocale())]) }}
@@ -18,18 +18,18 @@
     </div>
 
     {{-- About the Blog section --}}
-    @if($content)
-    <div class="py-16 border-b border-grey-lighter lg:py-20">
-        <div class="flex items-center pb-6">
-            <img src="{{ asset('img/icon-story.png') }}" alt="icon story" />
-            <h3 class="ml-3 text-2xl font-semibold font-body text-primary dark:text-white">
-                {{ __('Blog::blog.about.title') }}
-            </h3>
+    @if ($content)
+        <div class="py-16 border-b border-grey-lighter lg:py-20">
+            <div class="flex items-center pb-6">
+                <img src="{{ asset('img/icon-story.png') }}" alt="icon story" />
+                <h3 class="ml-3 text-2xl font-semibold font-body text-primary dark:text-white">
+                    {{ __('Blog::blog.about.title') }}
+                </h3>
+            </div>
+            <div class="font-light font-body text-primary dark:text-white">
+                {!! tiptap_converter()->asHTML($content->translation->content) !!}
+            </div>
         </div>
-        <div class="font-light font-body text-primary dark:text-white">
-            {!! $content->translation->content !!}
-        </div>
-    </div>
     @endif
 
     {{-- Latest blog posts --}}

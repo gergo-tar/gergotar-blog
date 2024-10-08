@@ -14,7 +14,7 @@
                 </div>
 
                 <div class="w-full pt-4 text-lg font-light lg:w-2/3 lg:p-5 font-body text-primary dark:text-white">
-                    {!! $content ? $content->translation->content : __('Page::about.content') !!}
+                    {!! $content ? tiptap_converter()->asHTML($content->translation->content) : __('Page::about.content') !!}
                 </div>
             </div>
         </div>
