@@ -58,7 +58,21 @@ test('post-create-save', function () {
         $this->assertDatabaseHas(PostTranslation::class, [
             'locale' => $locale,
             'title' => $data[$locale]['title'],
-            'content' => "<p>{$data[$locale]['content']}</p>",
+            'content' => json_encode([
+                'type' => 'doc',
+                'content' => [
+                    [
+                        'type' => 'paragraph',
+                        'attrs' => ['textAlign' => 'start'],
+                        'content' => [
+                            [
+                                'type' => 'text',
+                                'text' => $data[$locale]['content'],
+                            ],
+                        ],
+                    ],
+                ],
+            ]),
         ]);
 
         $translation = PostTranslation::where('title', $data[$locale]['title'])->first();
@@ -82,7 +96,7 @@ test('post-create-save', function () {
     $this->assertDatabaseHas(Post::class, [
         'id' => $translation->post_id,
         'published_at' => $data['is_published'] ? now() : null,
-        'is_published' => $data['is_published'],
+        'is_published' => (int) $data['is_published'],
         'author_id' => $data['author_id'],
         // 'featured_image_id' => $data['featured_image_id'],
     ]);

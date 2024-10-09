@@ -90,7 +90,7 @@ test('post-edit-save', function () {
     // Check if post was updated with the correct translations.
     $post->refresh()->load('translations')->translations->each(function ($translation) use ($data) {
         expect($translation->title)->toBe($data[$translation->locale]['title']);
-        expect($translation->content)->toBe("<p>{$data[$translation->locale]['content']}</p>");
+        expect(tiptap_converter()->asHtml($translation->content))->toBe("<p>{$data[$translation->locale]['content']}</p>");
 
         $translation->load('metas');
 

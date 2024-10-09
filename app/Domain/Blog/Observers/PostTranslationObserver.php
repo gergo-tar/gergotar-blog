@@ -13,10 +13,7 @@ class PostTranslationObserver
      */
     public function creating(PostTranslation $model): void
     {
-        // Calculate the reading time
-        $model->reading_time = EstimatePostReadingTime::run(tiptap_converter()->asText($model->content));
-        // Update Post updated_at timestamp
-        $model->post->touch();
+        $this->estimateReadingTime($model);
     }
 
     /**
@@ -24,9 +21,17 @@ class PostTranslationObserver
      */
     public function updating(PostTranslation $model): void
     {
-        // Calculate the reading time
-        $model->reading_time = EstimatePostReadingTime::run(tiptap_converter()->asText($model->content));
-        // Update Post updated_at timestamp
+        $this->estimateReadingTime($model);
+    }
+
+    /**
+     * Handle the Model "updated" event.
+     */
+    private function estimateReadingTime(PostTranslation $model): void
+    {
+        $model->reading_time = EstimatePostReadingTime::run(
+            is_array($model->content) ? tiptap_converter()->asText($model->content) : $model->content
+        );
         $model->post->touch();
     }
 }

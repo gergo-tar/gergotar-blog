@@ -61,7 +61,7 @@ test('content-edit-save', function () {
     // Check if content was updated with the correct translations.
     $content->refresh()->translations->each(function ($translation) use ($data) {
         expect($data[$translation->locale])->toBe([
-            'content' => $translation->content,
+            'content' => tiptap_converter()->asHtml($translation->content),
         ]);
     });
 });

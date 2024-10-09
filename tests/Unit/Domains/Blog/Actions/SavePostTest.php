@@ -54,7 +54,7 @@ test('create-post', function () {
         expect($translation->metas->where('key', 'title')->first()->value)->toBe($data[$locale]['title']);
         expect($translation->metas->where('key', 'description')->first()->value)
             // Max length of description meta is 160 characters.
-            ->toBe(substr(strip_tags($data[$locale]['content']), 0, 160));
+            ->toBe(substr(tiptap_converter()->asText($data[$locale]['content']), 0, 160));
     }
 
     // Check if the reading time is estimated correctly.

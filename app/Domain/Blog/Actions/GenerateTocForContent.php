@@ -66,7 +66,7 @@ class GenerateTocForContent
 
         // Remove <body> and </body> tags
         return [
-            'html' => str_replace(['<body>', '</body>'], '', $body),
+            'content' => str_replace(['<body>', '</body>'], '', $body),
             'toc' => $toc !== ''
                 ? "<ul>{$toc}</ul>"
                 : null,
@@ -91,7 +91,7 @@ class GenerateTocForContent
 
         // Return the updated JSON with IDs and the generated ToC
         return [
-            'json' => $jsonContent,
+            'content' => $jsonContent,
             'toc' => $toc !== ''
                 ? "<ul>{$toc}</ul>"
                 : null,

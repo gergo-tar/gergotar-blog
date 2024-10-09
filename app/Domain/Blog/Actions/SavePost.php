@@ -83,17 +83,19 @@ class SavePost
             }
 
             $data[$language]['meta']['title'] ??= $data[$language]['title'];
-            $data[$language]['excerpt'] ??= substr(
-                strip_tags($data[$language]['content']),
-                0,
-                160
-            );
+            if ($data[$language]['content']) {
+                $data[$language]['excerpt'] ??= substr(
+                    tiptap_converter()->asText($data[$language]['content']),
+                    0,
+                    160
+                );
+            }
             $data[$language]['meta']['description'] ??= $data[$language]['excerpt'];
 
             // Update the content to add IDs to <h3> tags if missing, ensuring unique IDs.
             if ($data[$language]['content']) {
                 $toc = GenerateTocForContent::run($data[$language]['content']);
-                $data[$language]['content'] = $toc['json'];
+                $data[$language]['content'] = is_array($toc['content']) ? json_encode($toc['content']) : $toc['content'];
                 $data[$language]['toc'] = $toc['toc'];
             }
         }

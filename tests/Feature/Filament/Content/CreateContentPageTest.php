@@ -50,13 +50,12 @@ test('content-create-save', function () {
     // Check if content was created with the correct translations.
     foreach ($locales as $locale) {
         $this->assertDatabaseHas(ContentTranslation::class, [
-            'content' => $data[$locale]['content'],
             'content_id' => $content->id,
         ]);
         $translation = ContentTranslation::where('content_id', $content->id)
             ->where('locale', $locale)
             ->first();
-
+        expect(tiptap_converter()->asHtml($translation->content))->toBe($data[$locale]['content']);
         // Check if content meta was created with the correct translations.
         $this->assertDatabaseHas(Meta::class, [
             'key' => 'title',

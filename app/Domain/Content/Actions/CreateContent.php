@@ -25,9 +25,18 @@ class CreateContent
             $dataCollection->only((new Content())->getFillable())->toArray()
         );
 
+        // Encond content with json_encode
+        $translations = $dataCollection->only(config('localized-routes.supported_locales'))->map(function ($translationData) {
+            if ($translationData['content'] && is_array($translationData['content'])) {
+                $translationData['content'] = json_encode($translationData['content']);
+            }
+
+            return $translationData;
+        });
+
         StoreTranslations::run(
             $content,
-            $dataCollection->only(config('localized-routes.supported_locales'))->toArray()
+            $translations->toArray()
         );
 
         return $content->loadTranslations([
