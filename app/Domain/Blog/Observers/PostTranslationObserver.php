@@ -30,7 +30,7 @@ class PostTranslationObserver
     private function estimateReadingTime(PostTranslation $model): void
     {
         $model->reading_time = EstimatePostReadingTime::run(
-            is_array($model->content) ? tiptap_converter()->asText($model->content) : $model->content
+            tiptap_converter()->asText($model->content)
         );
         $model->post->touch();
     }

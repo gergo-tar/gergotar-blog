@@ -1,3 +1,5 @@
+[![Laravel Forge Site Deployment Status](https://img.shields.io/endpoint?url=https%3A%2F%2Fforge.laravel.com%2Fsite-badges%2F335fed31-bd4c-40cb-b3ce-28942b1edaed%3Fdate%3D1%26label%3D1&style=flat-square)](https://forge.laravel.com/servers/448934/sites/2101099)
+
 # Laravel Blog Application
 
 The source code of my blog: [https://gergotar.com](https://gergotar.com)  

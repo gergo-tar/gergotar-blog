@@ -12,9 +12,6 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Attributes\ObservedBy;
 use Database\Factories\Domain\Blog\PostTranslationFactory;
 
-/**
- * @property string|array $content
- */
 #[ObservedBy([PostTranslationObserver::class])]
 class PostTranslation extends AbstractTranslation
 {
