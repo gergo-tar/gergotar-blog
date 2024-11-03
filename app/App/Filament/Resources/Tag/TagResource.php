@@ -2,15 +2,13 @@
 
 namespace App\Filament\Resources\Tag;
 
-use Filament\Tables;
 use Filament\Forms\Form;
 use Domain\Tag\Models\Tag;
-use Filament\Resources\Resource;
-use Filament\Support\Enums\FontWeight;
-use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
+use Filament\Resources\Resource;
 use App\Filament\Resources\Tag\TagResource\Pages;
 use App\Filament\Resources\Tag\TagResource\Forms\TagForm;
+use App\Filament\Resources\Tag\TagResource\Tables\TagTable;
 
 class TagResource extends Resource
 {
@@ -35,24 +33,7 @@ class TagResource extends Resource
 
     public static function table(Table $table): Table
     {
-        return $table
-            ->columns([
-                TextColumn::make('translation.name')
-                    ->label(__('general.name'))
-                    ->weight(FontWeight::Bold)
-                    ->searchable()
-                    ->sortable(),
-            ])
-            ->filters([])
-            ->actions([
-                Tables\Actions\EditAction::make(),
-                Tables\Actions\DeleteAction::make(),
-            ])
-            ->bulkActions([
-                Tables\Actions\BulkActionGroup::make([
-                    Tables\Actions\DeleteBulkAction::make(),
-                ]),
-            ]);
+        return TagTable::make($table);
     }
 
     public static function getRelations(): array

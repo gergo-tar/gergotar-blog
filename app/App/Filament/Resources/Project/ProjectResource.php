@@ -2,15 +2,13 @@
 
 namespace App\Filament\Resources\Project;
 
-use Filament\Tables;
 use Filament\Forms\Form;
 use Filament\Tables\Table;
 use Filament\Resources\Resource;
 use Domain\Project\Models\Project;
-use Filament\Support\Enums\FontWeight;
-use Filament\Tables\Columns\TextColumn;
 use App\Filament\Resources\Project\ProjectResource\Pages;
 use App\Filament\Resources\Project\ProjectResource\Forms\ProjectForm;
+use App\Filament\Resources\Project\ProjectResource\Tables\ProjectTable;
 
 class ProjectResource extends Resource
 {
@@ -35,24 +33,7 @@ class ProjectResource extends Resource
 
     public static function table(Table $table): Table
     {
-        return $table
-            ->columns([
-                TextColumn::make('translation.title')
-                    ->label(__('general.title'))
-                    ->weight(FontWeight::Bold)
-                    ->searchable()
-                    ->sortable(),
-            ])
-            ->filters([])
-            ->actions([
-                Tables\Actions\EditAction::make(),
-                Tables\Actions\DeleteAction::make(),
-            ])
-            ->bulkActions([
-                Tables\Actions\BulkActionGroup::make([
-                    Tables\Actions\DeleteBulkAction::make(),
-                ]),
-            ]);
+        return ProjectTable::make($table);
     }
 
     public static function getRelations(): array
