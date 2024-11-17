@@ -16,7 +16,7 @@ class EstimatePostReadingTime
      */
     public function handle(string $text, int $wpm = 200): array
     {
-        $withoutCodeBlocks = preg_replace('/<pre><code.*?<\/code><\/pre>/s', '', $text);
+        $withoutCodeBlocks = preg_replace('/<pre><code[\s\S]*?<\/code><\/pre>/m', '', $text);
         $totalWords = str_word_count(strip_tags($withoutCodeBlocks));
         $minutes = floor($totalWords / $wpm);
         $seconds = floor($totalWords % $wpm / ($wpm / 60));
