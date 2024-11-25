@@ -48,6 +48,21 @@
         <div class="py-8 prose border-b max-w-none border-grey-lighter dark:prose-dark sm:py-12">
             {!! tiptap_converter()->asHtml($post->translation->content) !!}
         </div>
+
+        {{-- Donate button --}}
+        @if (config('services.stripe.donate_link'))
+            <div class="pb-8 text-center sm:mb-12">
+                <p class="mt-8 mb-4 text-sm font-light font-body text-primary dark:text-white">
+                    @lang('donate.description')
+                </p>
+                <div
+                    class="block px-5 py-2 text-xs font-semibold text-center text-white transition-colors bg-secondary font-body hover:bg-green sm:inline-block sm:text-left sm:text-sm hover:cursor-pointer">
+                    <a href="{{ config('services.stripe.donate_link') }}" target="_blank">
+                        @lang('donate.button')
+                    </a>
+                </div>
+            </div>
+        @endif
     </div>
 
     <!-- Notification -->
@@ -156,8 +171,8 @@
 
                 // Create a wrapper div element
                 let wrapper = document.createElement('div');
-                wrapper.classList.add('relative',
-                'group'); // Make the wrapper relative for absolute positioning of the button
+                // Make the wrapper relative for absolute positioning of the button
+                wrapper.classList.add('relative', 'group');
 
                 // Create a button for copying, styled and positioned in the top-right corner
                 let copyButton = document.createElement('button');

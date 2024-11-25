@@ -35,4 +35,8 @@ return [
         ],
     ],
 
+    'stripe' => [
+        'donate_link' => env('STRIPE_DONATE_LINK'),
+    ],
+
 ];
