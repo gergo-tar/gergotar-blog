@@ -51,8 +51,8 @@
 
         {{-- Donate button --}}
         @if (config('services.stripe.donate_link'))
-            <div class="pb-8 text-center sm:mb-12">
-                <p class="mt-8 mb-4 text-sm font-light font-body text-primary dark:text-white">
+            <div class="py-8 text-center sm:py-10">
+                <p class="mb-4 text-sm font-light font-body text-primary dark:text-white">
                     @lang('donate.description')
                 </p>
                 <div
