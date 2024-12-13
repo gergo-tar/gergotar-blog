@@ -3,6 +3,7 @@
 namespace Domain\Blog\Actions;
 
 use DOMDocument;
+use Illuminate\Support\Str;
 use Lorisleiva\Actions\Concerns\AsAction;
 
 class GenerateTocForContent
@@ -84,7 +85,7 @@ class GenerateTocForContent
         $currentH3Id = null;
 
         // Initialize index for generating unique IDs
-        $index = 0;
+        $index = 1;
 
         // Start traversing the JSON content to generate the ToC
         $this->traverseJsonContent($jsonContent['content'], $toc, 1, $index, $currentH3Id);
@@ -111,7 +112,7 @@ class GenerateTocForContent
         array &$content,
         string &$toc,
         int $level = 1,
-        int &$index = 0,
+        int &$index = 1,
         ?string &$currentH3Id = null
     ): void {
         foreach ($content as $i => $block) {
@@ -140,9 +141,10 @@ class GenerateTocForContent
     {
         $headingLevel = $block['attrs']['level'];
         $textContent = isset($block['content'][0]['text']) ? $block['content'][0]['text'] : '';
+        $slug = Str::slug($textContent);
 
         // Generate or retrieve the block's ID
-        $id = $this->generateId($block, $index);
+        $id = $this->generateId($block, $index, $slug);
 
         // Generate ToC based on heading level
         if ($headingLevel == 3) {
@@ -161,12 +163,12 @@ class GenerateTocForContent
      * @param  array  $block  The block to generate an ID for.
      * @param  int  $index  The index of the block.
      */
-    protected function generateId(array &$block, int $index): string
+    protected function generateId(array &$block, int $index, string $slug): string
     {
         // Check if there's an existing ID, otherwise generate one
         $id = $block['attrs']['id'] ?? null;
         if (!$id) {
-            $id = 'heading-' . $index . '-' . uniqid();
+            $id = $index . '-' . $slug;
             $block['attrs']['id'] = $id;  // Add the unique ID to the block
         }
 
