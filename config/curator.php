@@ -9,6 +9,7 @@ return [
         'application/pdf',
         'video/mp4',
         'video/webm',
+        'application/json',
     ],
     'cloud_disks' => [
         's3',
