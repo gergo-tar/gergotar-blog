@@ -23,40 +23,59 @@ This project is built using Laravel, Livewire, and Tailwind CSS. It follows Doma
 ## Installation
 
 1. **Clone the repository:**
+
     ```bash
     git clone https://github.com/gergo-tar/gergotar-blog.git
     cd gergotar-blog
     ```
+
 2. **Install Composer dependencies:**
+
     ```bash
     composer install
     ```
+
 3. **Copy the example environment file:**
+
     ```bash
     cp .env.example .env
     ```
+
 4. **Configure your app:**
    Edit the .env file. See the [configuration](#configuration) section for more details.
 
 5. **Generate the application key:**
+
     ```bash
     php artisan key:generate
     ```
+
     You can also use Sail for this command after starting your container in local environment:
+
     ```bash
     sail artisan key:generate
     ```
+
 6. **Create a symbolic link of the storage folder:**
+
     ```bash
     php artisan storage:link
     ```
+
 7. **Run the migration and seeders:**
 
     ```bash
     php artisan migrate --seed
     ```
 
-8. **Install Node dependencies:**
+8. **Publish Filament assets:**
+
+    ```bash
+    php artisan filament:assets
+    ```
+
+9. **Install Node dependencies:**
+
     ```bash
     yarn install
     ```
@@ -85,16 +104,48 @@ To run the application in a local development environment using Sail:
     ```
 
 2. **Build your assets:**
+
     ```bash
-    yarn build
+    sail yarn build
     ```
-3. **Access the application:**
+
+3. **Publish Filament assets:**
+
+    ```bash
+    sail artisan filament:assets
+    ```
+
+4. **Access the application:**
    Open your browser and go to [http://localhost:8000](http://localhost:8000.)
 
-4. **Running Artisan commands with Sail:**
+5. **Running Artisan commands with Sail:**
    You can run any Artisan command using Sail:
+
     ```bash
     sail artisan migrate
+    ```
+
+## Deployment
+
+When deploying the application, make sure to run these additional commands since the Filament assets are excluded from version control:
+
+1. **Publish Filament assets:**
+
+    ```bash
+    php artisan filament:assets
+    ```
+
+2. **Clear and cache configuration:**
+
+    ```bash
+    php artisan config:cache
+    php artisan route:cache
+    php artisan view:cache
+    ```
+
+3. **Generate sitemap:**
+    ```bash
+    php artisan sitemap:generate
     ```
 
 ## Project Structure

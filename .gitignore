@@ -2,7 +2,12 @@
 /database/maxmind/*.mmdb
 /node_modules
 /public/build
+/public/css/awcodes
+/public/css/filament
+/public/fonts/filament
 /public/hot
+/public/js/awcodes
+/public/js/filament
 /public/storage
 /public/sitemap.xml
 /storage/*.key
