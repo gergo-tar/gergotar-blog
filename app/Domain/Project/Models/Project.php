@@ -9,8 +9,11 @@ use Database\Factories\Domain\Project\ProjectFactory;
 use Domain\Project\QueryBuilders\ProjectQueryBuilder;
 
 /**
- * @property ProjectTranslation|null $translation
- * @property Collection<ProjectTranslation|null> $translations
+ * @property int $id Primary key
+ * @property string $url The URL of the project
+ * @property bool $is_active Indicates if the project is active
+ * @property ProjectTranslation|null $translation  Default or selected translation for the project
+ * @property Collection<ProjectTranslation|null> $translations  Translations for the project
  */
 class Project extends BaseModel
 {
@@ -24,7 +27,7 @@ class Project extends BaseModel
     /**
      * The attributes that are mass assignable.
      *
-     * @var array<int, string>
+     * @var list<string>
      */
     protected $fillable = [
         'url',
@@ -34,11 +37,14 @@ class Project extends BaseModel
     /**
      * The attributes that should be cast.
      *
-     * @var array<string, string>
+     * @return array<string, string>
      */
-    protected $casts = [
-        'is_active' => 'boolean',
-    ];
+    protected function casts(): array
+    {
+        return [
+            'is_active' => 'boolean',
+        ];
+    }
 
     /**
      * Create a new factory instance for the model.

@@ -6,12 +6,25 @@ use Spatie\Sluggable\HasSlug;
 use Domain\Meta\Traits\HasMetas;
 use Spatie\Sluggable\SlugOptions;
 use Domain\User\Traits\HasUserAudit;
+use Illuminate\Database\Eloquent\Casts\Attribute;
 use Domain\Blog\Observers\PostTranslationObserver;
 use Domain\Translation\Models\AbstractTranslation;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Attributes\ObservedBy;
 use Database\Factories\Domain\Blog\PostTranslationFactory;
 
+/**
+ * @property int $id Primary key
+ * @property string $locale The locale of the translation
+ * @property string $title The title of the post in the specified locale
+ * @property string|null $slug The slug for the post, generated from the title
+ * @property string|null $content The content of the post in the specified locale
+ * @property string|null $toc Table of contents for the post in the specified locale
+ * @property string|null $excerpt A brief excerpt of the post in the specified locale
+ * @property string|null $url The canonical URL for the post, generated from the slug
+ * @property array|null $reading_time Estimated reading time for the post in minutes and seconds
+ * @property Post|null $post The post that owns this translation
+ */
 #[ObservedBy([PostTranslationObserver::class])]
 class PostTranslation extends AbstractTranslation
 {
@@ -22,7 +35,7 @@ class PostTranslation extends AbstractTranslation
     /**
      * The attributes that are mass assignable.
      *
-     * @var array<int, string>
+     * @var list<string>
      */
     protected $fillable = [
         'locale',
@@ -39,11 +52,14 @@ class PostTranslation extends AbstractTranslation
     /**
      * The attributes that should be cast.
      *
-     * @var array<string, string>
+     * @return array<string, string>
      */
-    protected $casts = [
-        'reading_time' => 'array',
-    ];
+    protected function casts(): array
+    {
+        return [
+            'reading_time' => 'array',
+        ];
+    }
 
     /**
      * Create a new factory instance for the model.
@@ -74,35 +90,39 @@ class PostTranslation extends AbstractTranslation
     /**
      * Get the canonical URL for the post.
      */
-    public function getUrlAttribute(): string
+    protected function url(): Attribute
     {
-        return route('blog.posts.show', [
-            'slug' => $this->slug,
-        ]);
+        return Attribute::make(get: function () {
+            return route('blog.posts.show', [
+                'slug' => $this->slug,
+            ]);
+        });
     }
 
     /**
      * Get the reading time string attribute.
      */
-    public function getReadingTimeStringAttribute(): string
+    protected function readingTimeString(): Attribute
     {
-        $minutes = $this->reading_time['minutes'] ?? 1;
-        $seconds = $this->reading_time['seconds'] ?? 0;
-
-        // if the reading time is less than 1 minute, then show the seconds.
-        if ($minutes === 0) {
-            return __('Blog::post.translations.reading_time_in_seconds', [
-                'sec' => $seconds,
+        return Attribute::make(get: function () {
+            $readingTime = $this->reading_time && !empty($this->reading_time)
+                ? $this->reading_time
+                : [];
+            $minutes = $readingTime['minutes'] ?? 1;
+            $seconds = $readingTime['seconds'] ?? 0;
+            // if the reading time is less than 1 minute, then show the seconds.
+            if ($minutes == 0) {
+                return __('Blog::post.translations.reading_time_in_seconds', [
+                    'sec' => $seconds,
+                ]);
+            }
+            // If reading time is more than 1 minute and seconds are more than 30, then show the minutes + 1.
+            if ($seconds > 30) {
+                $minutes += 1;
+            }
+            return __('Blog::post.translations.reading_time_in_minutes', [
+                'min' => $minutes,
             ]);
-        }
-
-        // If reading time is more than 1 minute and seconds are more than 30, then show the minutes + 1.
-        if ($seconds > 30) {
-            $minutes += 1;
-        }
-
-        return __('Blog::post.translations.reading_time_in_minutes', [
-            'min' => $minutes,
-        ]);
+        });
     }
 }

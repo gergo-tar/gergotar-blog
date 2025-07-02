@@ -3,10 +3,12 @@
 namespace Domain\Blog\Models;
 
 use Carbon\Carbon;
+use Domain\User\Models\User;
 use Spatie\Sitemap\Tags\Url;
 use Domain\Tag\Traits\HasTags;
 use Domain\Meta\Traits\HasMetas;
 use Illuminate\Support\Collection;
+use Domain\Category\Models\Category;
 use Domain\User\Traits\HasUserAudit;
 use Domain\Abstract\Models\BaseModel;
 use Domain\Blog\Traits\HasPostAuthor;
@@ -16,10 +18,22 @@ use Domain\Blog\Traits\HasPostFeaturedImage;
 use Domain\Translation\Traits\HasTranslations;
 use Database\Factories\Domain\Blog\PostFactory;
 use Domain\Blog\QueryBuilders\PostQueryBuilder;
+use Illuminate\Database\Eloquent\Casts\Attribute;
 
 /**
- * @property PostTranslation|null $translation
- * @property Collection<PostTranslation|null> $translations
+ * @property int $id Primary key
+ * @property int $author_id The ID of the author of the post
+ * @property int|null $featured_image_id The ID of the featured image for the post
+ * @property bool $is_published Indicates if the post is published
+ * @property User|null $author The author of the post
+ * @property Category|null $category The category of the post
+ * @property Carbon|null $published_at The date and time when the post was published
+ * @property string $published_at_formatted The formatted published date based on the locale
+ * @property string[] $tags_names The names of the tags associated with the post
+ * @property User|null $createdBy The user who created the post
+ * @property User|null $updatedBy The user who last updated the post
+ * @property PostTranslation|null $translation  Default or selected translation for the post
+ * @property Collection<PostTranslation|null> $translations  Translations for the post
  */
 class Post extends BaseModel implements Sitemapable
 {
@@ -39,7 +53,7 @@ class Post extends BaseModel implements Sitemapable
     /**
      * The attributes that are mass assignable.
      *
-     * @var array<int, string>
+     * @var list<string>
      */
     protected $fillable = [
         'author_id',
@@ -53,12 +67,15 @@ class Post extends BaseModel implements Sitemapable
     /**
      * The attributes that should be cast.
      *
-     * @var array<string, string>
+     * @return array<string, string>
      */
-    protected $casts = [
-        'is_published' => 'boolean',
-        'published_at' => 'datetime',
-    ];
+    protected function casts(): array
+    {
+        return [
+            'is_published' => 'boolean',
+            'published_at' => 'datetime',
+        ];
+    }
 
     /**
      * Create a new factory instance for the model.
@@ -119,26 +136,28 @@ class Post extends BaseModel implements Sitemapable
      * Get the post's published at date in a formatted way.
      * Based on the selected locale.
      */
-    public function getPublishedAtFormattedAttribute(): string
+    protected function publishedAtFormatted(): Attribute
     {
-        if (! $this->published_at) {
-            return '';
-        }
-
-        $format = 'l, F j, Y';
-        // Different format for Hungarian locale.
-        if (app()->getLocale() === 'hu') {
-            $format = 'Y. F j., l';
-        }
-
-        return $this->published_at->translatedFormat($format);
+        return Attribute::make(get: function () {
+            if (! $this->published_at) {
+                return '';
+            }
+            $format = 'l, F j, Y';
+            // Different format for Hungarian locale.
+            if (app()->getLocale() === 'hu') {
+                $format = 'Y. F j., l';
+            }
+            return $this->published_at->translatedFormat($format);
+        });
     }
 
     /**
      * Get the post's tags names.
      */
-    public function getTagsNamesAttribute(): array
+    protected function tagsNames(): Attribute
     {
-        return $this->tags->pluck('translation.name')->toArray();
+        return Attribute::make(get: function () {
+            return $this->tags->pluck('translation.name')->toArray();
+        });
     }
 }

@@ -13,6 +13,7 @@
         "awcodes/filament-curator": "^3.7",
         "awcodes/filament-tiptap-editor": "^3.5",
         "bezhansalleh/filament-language-switch": "^3.1",
+        "driftingly/rector-laravel": "^2.0",
         "filament/filament": "^3.3",
         "laravel/framework": "^12.19",
         "laravel/nightwatch": "^1.10",
@@ -80,7 +81,6 @@
             "@php artisan migrate --graceful --ansi"
         ],
         "format": "./vendor/bin/pint",
-        "analyse": "./vendor/bin/phpstan analyse",
         "refactor": "./vendor/bin/rector process"
     },
     "extra": {

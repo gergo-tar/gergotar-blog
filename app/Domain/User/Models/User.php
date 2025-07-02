@@ -3,14 +3,25 @@
 namespace Domain\User\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
+use Carbon\Carbon;
 use Filament\Panel;
 use Domain\Shared\Traits\GetTableName;
 use Illuminate\Notifications\Notifiable;
 use Filament\Models\Contracts\FilamentUser;
 use Database\Factories\Domain\User\UserFactory;
+use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
+/**
+ * @property int $id Primary key
+ * @property string $name User's name
+ * @property string $email User's email address
+ * @property string $password User's password
+ * @property Carbon|null $email_verified_at Timestamp when the email was verified
+ * @property string|null $remember_token Token for "remember me" functionality
+ * @property-read bool $is_admin Indicates if the user is an admin based on their email
+ */
 class User extends Authenticatable implements FilamentUser
 {
     use GetTableName;
@@ -20,7 +31,7 @@ class User extends Authenticatable implements FilamentUser
     /**
      * The attributes that are mass assignable.
      *
-     * @var array<int, string>
+     * @var list<string>
      */
     protected $fillable = [
         'name',
@@ -31,7 +42,7 @@ class User extends Authenticatable implements FilamentUser
     /**
      * The attributes that should be hidden for serialization.
      *
-     * @var array<int, string>
+     * @var list<string>
      */
     protected $hidden = [
         'password',
@@ -62,7 +73,7 @@ class User extends Authenticatable implements FilamentUser
     /**
      * Determine if the user can access the given panel.
      *
-     * @SuppressWarnings(PHPMD.UnusedFormalParameter)
+     * @SuppressWarnings(UnusedFormalParameter)
      */
     public function canAccessPanel(Panel $panel): bool
     {
@@ -72,8 +83,10 @@ class User extends Authenticatable implements FilamentUser
     /**
      * Determine if the user is an admin.
      */
-    public function getIsAdminAttribute(): bool
+    protected function isAdmin(): Attribute
     {
-        return str_ends_with($this->email, '@' . config('mail.filament_user_mail_domain'));
+        return Attribute::make(get: function () {
+            return str_ends_with($this->email, '@' . config('mail.filament_user_mail_domain'));
+        });
     }
 }

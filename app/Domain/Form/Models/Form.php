@@ -9,6 +9,12 @@ use Database\Factories\Domain\Form\FormFactory;
 use Domain\Form\QueryBuilders\FormQueryBuilder;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
+/**
+ * @property int $id Primary key
+ * @property string $name The name of the form
+ * @property array $fields The fields of the form
+ * @property bool $is_active Indicates if the form is active
+ */
 class Form extends BaseModel
 {
     use HasSlug;
@@ -21,7 +27,7 @@ class Form extends BaseModel
     /**
      * The attributes that are mass assignable.
      *
-     * @var array<int, string>
+     * @var list<string>
      */
     protected $fillable = [
         'name',
@@ -32,12 +38,15 @@ class Form extends BaseModel
     /**
      * The attributes that should be cast.
      *
-     * @var array<string, string>
+     * @return array<string, string>
      */
-    protected $casts = [
-        'fields' => 'array',
-        'is_active' => 'boolean',
-    ];
+    protected function casts(): array
+    {
+        return [
+            'fields' => 'array',
+            'is_active' => 'boolean',
+        ];
+    }
 
     /**
      * Create a new factory instance for the model.

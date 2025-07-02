@@ -148,6 +148,13 @@ When deploying the application, make sure to run these additional commands since
     php artisan sitemap:generate
     ```
 
+## Application Monitoring with Laravel Nightwatch
+
+Laravel Nightwatch is a monitoring service for Laravel applications that helps you track performance, errors, and other important metrics.
+To set it up follow these steps: [nightwatch.laravel.com](https://nightwatch.laravel.com/docs/getting-started/start-guide)
+
+**Note:** Once configured, Nightwatch will automatically start monitoring your application's performance, errors, and other metrics. You can view these insights in your Nightwatch dashboard at nightwatch.laravel.com.
+
 ## Project Structure
 
 The project follows a Domain-Driven Design approach:
@@ -177,6 +184,10 @@ The application is configured using the .env file. Key configurations include:
 -   `SOCIAL_LINKEDIN_LINK`: URL to your LinkedIn profile.
 
 -   `UMAMI_WEBSITE_ID`: Umami Analytics website identifier. Learn more [here](https://umami.is).
+
+-   `NIGHTWATCH_TOKEN`: Your Nightwatch environment token for application monitoring. Learn more [here](https://nightwatch.laravel.com).
+
+-   `NIGHTWATCH_REQUEST_SAMPLE_RATE`: Controls what percentage of requests are sampled for monitoring (0.1 = 10%). Adjust based on your application's traffic.
 
 ## Used Packages
 
