@@ -11,8 +11,10 @@ use Domain\Category\QueryBuilders\CategoryQueryBuilder;
 use Illuminate\Database\Eloquent\Relations\MorphToMany;
 
 /**
- * @property CategoryTranslation|null $translation
- * @property Collection<CategoryTranslation|null> $translations
+ * @property int $id Primary key
+ * @property Collection<Post|null> $posts Posts associated with the category
+ * @property CategoryTranslation|null $translation  Default or selected translation for the category
+ * @property Collection<CategoryTranslation|null> $translations Translations for the category
  */
 class Category extends BaseModel
 {

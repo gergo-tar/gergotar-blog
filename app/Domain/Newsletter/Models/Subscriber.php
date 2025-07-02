@@ -6,6 +6,12 @@ use Database\Factories\Domain\Newsletter\SubscriberFactory;
 use Domain\Abstract\Models\BaseModel;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
 
+/**
+ * @property string $id Unique identifier for the subscriber
+ * @property string $email Email address of the subscriber
+ * @property string|null $name Name of the subscriber
+ * @property string|null $preferred_language Preferred language of the subscriber
+ */
 class Subscriber extends BaseModel
 {
     use HasUuids;
@@ -13,7 +19,7 @@ class Subscriber extends BaseModel
     /**
      * The attributes that are mass assignable.
      *
-     * @var array<int, string>
+     * @var list<string>
      */
     protected $fillable = [
         'email',

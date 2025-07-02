@@ -10,6 +10,14 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Attributes\ObservedBy;
 use Database\Factories\Domain\Tag\TagTranslationFactory;
 
+/**
+ * @property int $id Primary key
+ * @property string $locale The locale of the translation
+ * @property string $name The name of the tag in the specified locale
+ * @property string|null $slug The slug for the tag, generated from the name
+ * @property string|null $description A description of the tag in the specified locale
+ * @property Tag|null $tag The tag that owns this translation
+ */
 #[ObservedBy([TagTranslationObserver::class])]
 class TagTranslation extends AbstractTranslation
 {
@@ -18,7 +26,7 @@ class TagTranslation extends AbstractTranslation
     /**
      * The attributes that are mass assignable.
      *
-     * @var array<int, string>
+     * @var list<string>
      */
     protected $fillable = [
         'locale',

@@ -10,6 +10,14 @@ use Illuminate\Database\Eloquent\Attributes\ObservedBy;
 use Domain\Project\Observers\ProjectTranslationObserver;
 use Database\Factories\Domain\Project\ProjectTranslationFactory;
 
+/**
+ * @property int $id Primary key
+ * @property string $locale The locale of the translation
+ * @property string $title The title of the project in the specified locale
+ * @property string|null $slug The slug for the project, generated from the title
+ * @property string|null $description A description of the project in the specified locale
+ * @property Project|null $project The project that owns this translation
+ */
 #[ObservedBy([ProjectTranslationObserver::class])]
 class ProjectTranslation extends AbstractTranslation
 {
@@ -18,7 +26,7 @@ class ProjectTranslation extends AbstractTranslation
     /**
      * The attributes that are mass assignable.
      *
-     * @var array<int, string>
+     * @var list<string>
      */
     protected $fillable = [
         'locale',

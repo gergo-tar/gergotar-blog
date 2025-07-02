@@ -11,8 +11,10 @@ use Domain\Translation\Traits\HasTranslations;
 use Illuminate\Database\Eloquent\Relations\MorphToMany;
 
 /**
- * @property TagTranslation|null $translation
- * @property Collection<TagTranslation|null> $translations
+ * @property int $id Primary key
+ * @property Collection<Post|null> $posts  Posts associated with the tag
+ * @property TagTranslation|null $translation  Default or selected translation for the tag
+ * @property Collection<TagTranslation|null> $translations  Translations for the tag
  */
 class Tag extends BaseModel
 {

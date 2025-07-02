@@ -12,8 +12,10 @@ use Database\Factories\Domain\Content\ContentFactory;
 use Domain\Content\QueryBuilders\ContentQueryBuilder;
 
 /**
- * @property ContentTranslation|null $translation
- * @property Collection<ContentTranslation|null> $translations
+ * @property int $id Primary key
+ * @property string $title The title of the content
+ * @property ContentTranslation|null $translation  Default or selected translation for the content
+ * @property Collection<ContentTranslation|null> $translations  Translations for the content
  */
 class Content extends BaseModel
 {
@@ -29,7 +31,7 @@ class Content extends BaseModel
     /**
      * The attributes that are mass assignable.
      *
-     * @var array<int, string>
+     * @var list<string>
      */
     protected $fillable = [
         'title',

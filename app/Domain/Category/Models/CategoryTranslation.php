@@ -10,6 +10,14 @@ use Illuminate\Database\Eloquent\Attributes\ObservedBy;
 use Domain\Category\Observers\CategoryTranslationObserver;
 use Database\Factories\Domain\Category\CategoryTranslationFactory;
 
+/**
+ * @property int $id Primary key
+ * @property string $locale The locale of the translation
+ * @property string $name The name of the category in the specified locale
+ * @property string|null $slug The slug for the category, generated from the name
+ * @property string|null $description A description of the category in the specified locale
+ * @property Category|null $category The category that owns this translation
+ */
 #[ObservedBy([CategoryTranslationObserver::class])]
 class CategoryTranslation extends AbstractTranslation
 {
@@ -18,7 +26,7 @@ class CategoryTranslation extends AbstractTranslation
     /**
      * The attributes that are mass assignable.
      *
-     * @var array<int, string>
+     * @var list<string>
      */
     protected $fillable = [
         'locale',

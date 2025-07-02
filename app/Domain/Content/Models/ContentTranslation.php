@@ -9,6 +9,12 @@ use Illuminate\Database\Eloquent\Attributes\ObservedBy;
 use Domain\Content\Observers\ContentTranslationObserver;
 use Database\Factories\Domain\Content\ContentTranslationFactory;
 
+/**
+ * @property int $id Primary key
+ * @property string $locale The locale of the translation
+ * @property string $content The content in the specified locale
+ * @property Content|null $contentModel The content that owns this translation
+ */
 #[ObservedBy([ContentTranslationObserver::class])]
 class ContentTranslation extends AbstractTranslation
 {
@@ -17,7 +23,7 @@ class ContentTranslation extends AbstractTranslation
     /**
      * The attributes that are mass assignable.
      *
-     * @var array<int, string>
+     * @var list<string>
      */
     protected $fillable = [
         'locale',
