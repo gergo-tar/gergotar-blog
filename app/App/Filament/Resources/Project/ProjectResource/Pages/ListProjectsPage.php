@@ -2,8 +2,8 @@
 
 namespace App\Filament\Resources\Project\ProjectResource\Pages;
 
+use Filament\Actions\CreateAction;
 use App\Filament\Resources\Project\ProjectResource;
-use Filament\Actions;
 use Filament\Resources\Pages\ListRecords;
 
 class ListProjectsPage extends ListRecords
@@ -13,7 +13,7 @@ class ListProjectsPage extends ListRecords
     protected function getHeaderActions(): array
     {
         return [
-            Actions\CreateAction::make(),
+            CreateAction::make(),
         ];
     }
 }

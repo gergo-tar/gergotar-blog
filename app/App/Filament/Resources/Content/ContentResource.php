@@ -2,25 +2,30 @@
 
 namespace App\Filament\Resources\Content;
 
-use Filament\Tables;
-use Filament\Forms\Form;
+use Filament\Schemas\Schema;
+use Filament\Actions\EditAction;
+use Filament\Actions\DeleteAction;
+use Filament\Actions\BulkActionGroup;
+use Filament\Actions\DeleteBulkAction;
+use App\Filament\Resources\Content\ContentResource\Pages\ListContentsPage;
+use App\Filament\Resources\Content\ContentResource\Pages\CreateContentPage;
+use App\Filament\Resources\Content\ContentResource\Pages\EditContentPage;
 use Filament\Tables\Table;
 use Filament\Resources\Resource;
 use Domain\Content\Models\Content;
 use Filament\Support\Enums\FontWeight;
 use Filament\Tables\Columns\TextColumn;
-use App\Filament\Resources\Content\ContentResource\Pages;
 use App\Filament\Resources\Content\ContentResource\Forms\ContentForm;
 
 class ContentResource extends Resource
 {
     protected static ?string $model = Content::class;
 
-    protected static ?string $navigationIcon = 'heroicon-o-document-text';
+    protected static string | \BackedEnum | null $navigationIcon = 'heroicon-o-document-text';
 
-    public static function form(Form $form): Form
+    public static function form(Schema $schema): Schema
     {
-        return $form->schema(ContentForm::make());
+        return $schema->components(ContentForm::make());
     }
 
     public static function table(Table $table): Table
@@ -34,13 +39,13 @@ class ContentResource extends Resource
                     ->sortable(),
             ])
             ->filters([])
-            ->actions([
-                Tables\Actions\EditAction::make(),
-                Tables\Actions\DeleteAction::make(),
+            ->recordActions([
+                EditAction::make(),
+                DeleteAction::make(),
             ])
-            ->bulkActions([
-                Tables\Actions\BulkActionGroup::make([
-                    Tables\Actions\DeleteBulkAction::make(),
+            ->toolbarActions([
+                BulkActionGroup::make([
+                    DeleteBulkAction::make(),
                 ]),
             ]);
     }
@@ -53,9 +58,9 @@ class ContentResource extends Resource
     public static function getPages(): array
     {
         return [
-            'index' => Pages\ListContentsPage::route('/'),
-            'create' => Pages\CreateContentPage::route('/create'),
-            'edit' => Pages\EditContentPage::route('/{record}/edit'),
+            'index' => ListContentsPage::route('/'),
+            'create' => CreateContentPage::route('/create'),
+            'edit' => EditContentPage::route('/{record}/edit'),
         ];
     }
 }

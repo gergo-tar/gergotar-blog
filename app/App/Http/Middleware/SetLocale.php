@@ -2,6 +2,8 @@
 
 namespace App\Http\Middleware;
 
+use Livewire\Livewire;
+use Livewire\LivewireManager;
 use Closure;
 use CodeZero\LocalizedRoutes\LocalizedUrlGenerator;
 use CodeZero\LocalizedRoutes\Middleware\Detectors\RouteActionDetector;
@@ -17,7 +19,7 @@ class SetLocale
     /**
      * LocaleHandler.
      *
-     * @var \CodeZero\LocalizedRoutes\Middleware\LocaleHandler
+     * @var LocaleHandler
      */
     protected $handler;
 
@@ -71,7 +73,7 @@ class SetLocale
             return null;
         }
 
-        $url = \Livewire\Livewire::originalUrl();
+        $url = Livewire::originalUrl();
         $originalRequest = Request::create($url);
 
         $originalRequest->setRouteResolver(function () use ($originalRequest) {
@@ -102,7 +104,7 @@ class SetLocale
      */
     protected function isLivewireRequest(): bool
     {
-        return class_exists(\Livewire\LivewireManager::class)
-            && App::make(\Livewire\LivewireManager::class)->isLivewireRequest();
+        return class_exists(LivewireManager::class)
+            && App::make(LivewireManager::class)->isLivewireRequest();
     }
 }

@@ -2,7 +2,7 @@
 
 namespace App\Filament\Resources\Blog\PostResource\Forms;
 
-use Filament\Forms\Components\Section;
+use Filament\Schemas\Components\Section;
 use Awcodes\Curator\Components\Forms\CuratorPicker;
 use App\Filament\Resources\Abstract\Forms\AbstractWithTranslationForm;
 

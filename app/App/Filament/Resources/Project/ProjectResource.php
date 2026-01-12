@@ -2,11 +2,13 @@
 
 namespace App\Filament\Resources\Project;
 
-use Filament\Forms\Form;
+use Filament\Schemas\Schema;
+use App\Filament\Resources\Project\ProjectResource\Pages\ListProjectsPage;
+use App\Filament\Resources\Project\ProjectResource\Pages\CreateProjectPage;
+use App\Filament\Resources\Project\ProjectResource\Pages\EditProjectPage;
 use Filament\Tables\Table;
 use Filament\Resources\Resource;
 use Domain\Project\Models\Project;
-use App\Filament\Resources\Project\ProjectResource\Pages;
 use App\Filament\Resources\Project\ProjectResource\Forms\ProjectForm;
 use App\Filament\Resources\Project\ProjectResource\Tables\ProjectTable;
 
@@ -14,7 +16,7 @@ class ProjectResource extends Resource
 {
     protected static ?string $model = Project::class;
 
-    protected static ?string $navigationIcon = 'heroicon-o-code-bracket';
+    protected static string | \BackedEnum | null $navigationIcon = 'heroicon-o-code-bracket';
 
     public static function getModelLabel(): string
     {
@@ -26,9 +28,9 @@ class ProjectResource extends Resource
         return __('Project::project.plural');
     }
 
-    public static function form(Form $form): Form
+    public static function form(Schema $schema): Schema
     {
-        return $form->schema(ProjectForm::make());
+        return $schema->components(ProjectForm::make());
     }
 
     public static function table(Table $table): Table
@@ -44,9 +46,9 @@ class ProjectResource extends Resource
     public static function getPages(): array
     {
         return [
-            'index' => Pages\ListProjectsPage::route('/'),
-            'create' => Pages\CreateProjectPage::route('/create'),
-            'edit' => Pages\EditProjectPage::route('/{record}/edit'),
+            'index' => ListProjectsPage::route('/'),
+            'create' => CreateProjectPage::route('/create'),
+            'edit' => EditProjectPage::route('/{record}/edit'),
         ];
     }
 }

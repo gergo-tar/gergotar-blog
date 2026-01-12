@@ -2,8 +2,8 @@
 
 namespace App\Filament\Resources\Tag\TagResource\Pages;
 
+use Filament\Actions\CreateAction;
 use App\Filament\Resources\Tag\TagResource;
-use Filament\Actions;
 use Filament\Resources\Pages\ListRecords;
 
 class ListTagsPage extends ListRecords
@@ -13,7 +13,7 @@ class ListTagsPage extends ListRecords
     protected function getHeaderActions(): array
     {
         return [
-            Actions\CreateAction::make(),
+            CreateAction::make(),
         ];
     }
 }

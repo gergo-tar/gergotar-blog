@@ -2,8 +2,8 @@
 
 namespace App\Filament\Resources\Abstract\Forms;
 
-use Filament\Forms\Components\Tabs;
-use Filament\Forms\Components\Tabs\Tab;
+use Filament\Schemas\Components\Tabs;
+use Filament\Schemas\Components\Tabs\Tab;
 
 abstract class AbstractWithTranslationForm
 {

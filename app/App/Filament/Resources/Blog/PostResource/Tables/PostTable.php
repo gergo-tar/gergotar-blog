@@ -2,7 +2,9 @@
 
 namespace App\Filament\Resources\Blog\PostResource\Tables;
 
-use Filament\Tables;
+use Filament\Actions\EditAction;
+use Filament\Actions\BulkActionGroup;
+use Filament\Actions\DeleteBulkAction;
 use Filament\Tables\Table;
 use Filament\Tables\Filters\Filter;
 use Domain\User\Actions\GetEditorUsers;
@@ -22,12 +24,12 @@ class PostTable
                     ->label(__('Blog::post.author'))
                     ->options(GetEditorUsers::run(['id', 'name'])->pluck('name', 'id')),
             ])
-            ->actions([
-                Tables\Actions\EditAction::make(),
+            ->recordActions([
+                EditAction::make(),
             ])
-            ->bulkActions([
-                Tables\Actions\BulkActionGroup::make([
-                    Tables\Actions\DeleteBulkAction::make(),
+            ->toolbarActions([
+                BulkActionGroup::make([
+                    DeleteBulkAction::make(),
                 ]),
             ])->defaultSort('created_at', 'desc');
     }

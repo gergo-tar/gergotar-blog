@@ -1,11 +1,10 @@
-@tailwind base;
-@tailwind components;
+@import "tailwindcss";
+
+@config '../../tailwind.config.js';
 
 html {
     @apply antialiased font-body;
 }
-
-@tailwind utilities;
 
 .container {
     max-width: 600px;

@@ -2,11 +2,13 @@
 
 namespace App\Filament\Resources\Blog;
 
-use Filament\Forms\Form;
+use Filament\Schemas\Schema;
+use App\Filament\Resources\Blog\PostResource\Pages\ListPostsPage;
+use App\Filament\Resources\Blog\PostResource\Pages\CreatePostPage;
+use App\Filament\Resources\Blog\PostResource\Pages\EditPostPage;
 use Filament\Tables\Table;
 use Domain\Blog\Models\Post;
 use Filament\Resources\Resource;
-use App\Filament\Resources\Blog\PostResource\Pages;
 use App\Filament\Resources\Blog\PostResource\Forms\PostForm;
 use App\Filament\Resources\Blog\PostResource\Tables\PostTable;
 
@@ -14,7 +16,7 @@ class PostResource extends Resource
 {
     protected static ?string $model = Post::class;
 
-    protected static ?string $navigationIcon = 'heroicon-o-book-open';
+    protected static string | \BackedEnum | null $navigationIcon = 'heroicon-o-book-open';
 
     public static function getModelLabel(): string
     {
@@ -26,9 +28,9 @@ class PostResource extends Resource
         return __('Blog::post.plural');
     }
 
-    public static function form(Form $form): Form
+    public static function form(Schema $schema): Schema
     {
-        return $form->schema(PostForm::make());
+        return $schema->components(PostForm::make());
     }
 
     public static function table(Table $table): Table
@@ -44,9 +46,9 @@ class PostResource extends Resource
     public static function getPages(): array
     {
         return [
-            'index' => Pages\ListPostsPage::route('/'),
-            'create' => Pages\CreatePostPage::route('/create'),
-            'edit' => Pages\EditPostPage::route('/{record}/edit'),
+            'index' => ListPostsPage::route('/'),
+            'create' => CreatePostPage::route('/create'),
+            'edit' => EditPostPage::route('/{record}/edit'),
         ];
     }
 }

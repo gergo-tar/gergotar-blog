@@ -13,8 +13,10 @@ export default {
         "./app/App/**/resources/**/*.vue",
     ],
     theme: {
-        fontFamily: {
-            body: ["Poppins", "sans-serif"],
+        extend: {
+            fontFamily: {
+                body: ["Poppins", "sans-serif"],
+            },
         },
 
         screens: {

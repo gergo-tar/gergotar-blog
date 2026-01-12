@@ -2,8 +2,8 @@
 
 namespace App\Filament\Resources\Content\ContentResource\Forms;
 
+use Filament\Schemas\Components\Section;
 use Domain\Content\Models\Content;
-use Filament\Forms\Components\Section;
 use FilamentTiptapEditor\TiptapEditor;
 use Filament\Forms\Components\Textarea;
 use Filament\Forms\Components\TextInput;

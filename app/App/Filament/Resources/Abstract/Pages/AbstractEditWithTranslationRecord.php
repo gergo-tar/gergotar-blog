@@ -2,7 +2,7 @@
 
 namespace App\Filament\Resources\Abstract\Pages;
 
-use Filament\Actions;
+use Filament\Actions\DeleteAction;
 use Filament\Resources\Pages\EditRecord;
 use Illuminate\Database\Eloquent\Model;
 
@@ -11,7 +11,7 @@ abstract class AbstractEditWithTranslationRecord extends EditRecord
     protected function getHeaderActions(): array
     {
         return [
-            Actions\DeleteAction::make(),
+            DeleteAction::make(),
         ];
     }
 

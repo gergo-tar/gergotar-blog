@@ -2,11 +2,13 @@
 
 namespace App\Filament\Resources\Category;
 
-use Filament\Forms\Form;
+use Filament\Schemas\Schema;
+use App\Filament\Resources\Category\CategoryResource\Pages\ListCategoriesPage;
+use App\Filament\Resources\Category\CategoryResource\Pages\CreateCategoryPage;
+use App\Filament\Resources\Category\CategoryResource\Pages\EditCategoryPage;
 use Filament\Tables\Table;
 use Filament\Resources\Resource;
 use Domain\Category\Models\Category;
-use App\Filament\Resources\Category\CategoryResource\Pages;
 use App\Filament\Resources\Category\CategoryResource\Forms\CategoryForm;
 use App\Filament\Resources\Category\CategoryResource\Tables\CategoryTable;
 
@@ -14,7 +16,7 @@ class CategoryResource extends Resource
 {
     protected static ?string $model = Category::class;
 
-    protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
+    protected static string | \BackedEnum | null $navigationIcon = 'heroicon-o-rectangle-stack';
 
     public static function getModelLabel(): string
     {
@@ -26,9 +28,9 @@ class CategoryResource extends Resource
         return __('Category::category.plural');
     }
 
-    public static function form(Form $form): Form
+    public static function form(Schema $schema): Schema
     {
-        return $form->schema(CategoryForm::make());
+        return $schema->components(CategoryForm::make());
     }
 
     public static function table(Table $table): Table
@@ -44,9 +46,9 @@ class CategoryResource extends Resource
     public static function getPages(): array
     {
         return [
-            'index' => Pages\ListCategoriesPage::route('/'),
-            'create' => Pages\CreateCategoryPage::route('/create'),
-            'edit' => Pages\EditCategoryPage::route('/{record}/edit'),
+            'index' => ListCategoriesPage::route('/'),
+            'create' => CreateCategoryPage::route('/create'),
+            'edit' => EditCategoryPage::route('/{record}/edit'),
         ];
     }
 }

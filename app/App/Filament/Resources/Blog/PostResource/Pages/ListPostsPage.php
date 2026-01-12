@@ -2,8 +2,8 @@
 
 namespace App\Filament\Resources\Blog\PostResource\Pages;
 
+use Filament\Actions\CreateAction;
 use App\Filament\Resources\Blog\PostResource;
-use Filament\Actions;
 use Filament\Resources\Pages\ListRecords;
 
 class ListPostsPage extends ListRecords
@@ -13,7 +13,7 @@ class ListPostsPage extends ListRecords
     protected function getHeaderActions(): array
     {
         return [
-            Actions\CreateAction::make(),
+            CreateAction::make(),
         ];
     }
 }

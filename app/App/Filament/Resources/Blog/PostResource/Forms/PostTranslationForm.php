@@ -2,7 +2,7 @@
 
 namespace App\Filament\Resources\Blog\PostResource\Forms;
 
-use Filament\Forms\Components\Section;
+use Filament\Schemas\Components\Section;
 use FilamentTiptapEditor\TiptapEditor;
 use Domain\Blog\Models\PostTranslation;
 use Filament\Forms\Components\Textarea;
